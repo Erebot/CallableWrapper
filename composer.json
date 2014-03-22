@@ -20,7 +20,8 @@
         "source": "https://github.com/Erebot/CallableWrapper"
     },
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.3.0",
+        "ext-spl": "*"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "*",
