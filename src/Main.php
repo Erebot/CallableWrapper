@@ -90,7 +90,7 @@ class Main implements \Erebot\CallableWrapper\CallableInterface
 
     public function __toString()
     {
-        return $this->_representation;
+        return $this->representation;
     }
 
     public function __invoke()
