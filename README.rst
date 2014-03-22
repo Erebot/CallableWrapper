@@ -17,7 +17,7 @@ Create a ``composer.json`` that requires Erebot's Callable component.
 
     {
         "require": {
-            "erebot/callable": "dev-master"
+            "erebot/callable-wrapper": "dev-master"
         }
     }
 
