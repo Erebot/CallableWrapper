@@ -1,0 +1,39 @@
+{
+    "prefer-stable": true,
+    "name": "erebot/callable-wrapper",
+    "description": "Callable wrapper for PHP < 5.4.0",
+    "keywords": ["callable"],
+    "homepage": "https://github.com/Erebot/CallableWrapper",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "François Poirotte",
+            "email": "clicky@erebot.net",
+            "role": "lead"
+        }
+    ],
+    "support": {
+        "email": "erebot@erebot.net",
+        "issues": "https://github.com/Erebot/CallableWrapper/issues",
+        "wiki": "http://erebot.github.io/Erebot/",
+        "irc": "irc://irc.iiens.net/Erebot",
+        "source": "https://github.com/Erebot/CallableWrapper"
+    },
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*",
+        "phpunit/phpunit": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Erebot\\CallableWrapper\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
