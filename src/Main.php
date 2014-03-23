@@ -85,7 +85,7 @@ class Main implements \Erebot\CallableWrapper\CallableInterface
      */
     public function invokeArgs(&$args)
     {
-        return call_user_func_array($this->_callable, $args);
+        return call_user_func_array($this->callable, $args);
     }
 
     public function __toString()
