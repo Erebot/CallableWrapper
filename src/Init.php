@@ -18,9 +18,16 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\CallableWrapper;
 
-if (!defined('T_CALLABLE')) {
-    if (class_alias('\\Erebot\\CallableWrapper\\Main', 'callable', true) !== true) {
-        throw new \RuntimeException('Could not load wrapper');
+class Init
+{
+    public static function initialize()
+    {
+        if (!defined('T_CALLABLE')) {
+            if (class_alias('\\Erebot\\CallableWrapper\\Main', 'callable', true) !== true) {
+                throw new \RuntimeException('Could not load wrapper');
+            }
+        }
     }
 }
