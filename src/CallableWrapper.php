@@ -18,7 +18,7 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace Erebot\CallableWrapper;
+namespace Erebot;
 
 /**
  * \brief
@@ -27,7 +27,7 @@ namespace Erebot\CallableWrapper;
  * This class can represent a wild range of callable items
  * supported by PHP (functions, lambdas, methods, closures, etc.).
  */
-class Main implements \Erebot\CallableWrapper\CallableInterface
+class CallableWrapper implements \Erebot\CallableInterface
 {
     /// Inner callable object, as used by PHP.
     protected $callable;
@@ -117,5 +117,14 @@ class Main implements \Erebot\CallableWrapper\CallableInterface
         }
 
         return call_user_func(array($this, 'invokeArgs'), $args);
+    }
+
+    public static function initialize()
+    {
+        if (!defined('T_CALLABLE')) {
+            if (class_alias('\\Erebot\\CallableWrapper', 'callable', true) !== true) {
+                throw new \RuntimeException('Could not load wrapper');
+            }
+        }
     }
 }
