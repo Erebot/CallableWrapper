@@ -121,7 +121,7 @@ class CallableWrapper implements \Erebot\CallableInterface
 
     public static function initialize()
     {
-        if (!defined('T_CALLABLE')) {
+        if (!defined('T_CALLABLE') && !class_exists('callable', false)) {
             if (class_alias('\\Erebot\\CallableWrapper', 'callable', true) !== true) {
                 throw new \RuntimeException('Could not load wrapper');
             }
