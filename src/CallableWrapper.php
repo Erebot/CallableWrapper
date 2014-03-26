@@ -54,7 +54,7 @@ abstract class CallableWrapper implements \Erebot\CallableInterface
      */
     protected function __construct($callable)
     {
-        if (!is_callable($callable, FALSE, $representation)) {
+        if (!is_callable($callable, false, $representation)) {
             throw new Erebot_InvalidValueException('Not a valid callable');
         }
 
