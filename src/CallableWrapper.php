@@ -121,11 +121,12 @@ class CallableWrapper implements \Erebot\CallableInterface
 
     public static function initialize()
     {
-        if (!defined('T_CALLABLE')) {
+        static $initialized = false;
+        if (!defined('T_CALLABLE') && !$initialized) {
             spl_autoload_register(
                 function ($class) {
-                    if (ltrim(substr($class, strrpos($class, '\\'), '\\')) === 'callable') {
-                        if (class_alias('\\Erebot\\CallableWrapper', "\\$class", true) !== true) {
+                    if (ltrim(substr($class, strrpos($class, '\\')), '\\') === 'callable') {
+                        if (class_alias('\\Erebot\\CallableWrapper', "$class", true) !== true) {
                             throw new \RuntimeException('Could not load wrapper');
                         }
                         return true;
@@ -134,6 +135,7 @@ class CallableWrapper implements \Erebot\CallableInterface
                 },
                 true
             );
+            $initialized = true;
         }
     }
 }
