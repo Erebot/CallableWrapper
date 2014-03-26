@@ -39,8 +39,6 @@ interface CallableInterface
      */
     public function __invoke();
 
-    public function invokeArgs(&$args);
-
     /**
      * Returns a human representation of this callable.
      * For (anonymous) functions, this is a string containing

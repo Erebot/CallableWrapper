@@ -1,6 +1,6 @@
 <phpunit forceCoversAnnotation="true">
   <testsuites>
-    <testsuite name="Erebot/Callable">
+    <testsuite name="Erebot/CallableWrapper">
       <directory>tests/</directory>
     </testsuite>
   </testsuites>
