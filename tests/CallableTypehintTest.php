@@ -41,9 +41,6 @@ namespace {
             // This test is mainly intended for PHP 5.3.x
             // where the callable typehint does not exist
             // natively.
-
-            // The "class" must be defined first for this to work.
-            class_exists('\\Erebot\\CallableWrapper\\Tests\\callable');
             $wrapped = \Erebot\CallableWrapper::wrap(function () {});
             \Erebot\CallableWrapper\Tests\CallableWrapperTypehintHelper($wrapped);
         }
@@ -54,9 +51,6 @@ namespace {
             // This test is mainly intended for PHP 5.3.x
             // where the callable typehint does not exist
             // natively.
-
-            // The "callable" class is defined automatically during
-            // the wrapper's initialization process.
             $wrapped = \Erebot\CallableWrapper::wrap(function () {});
             \CallableWrapperTypehintHelper($wrapped);
         }

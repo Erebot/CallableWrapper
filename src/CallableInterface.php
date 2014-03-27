@@ -31,24 +31,9 @@ namespace Erebot;
 interface CallableInterface
 {
     /**
-     * Implementation of the __invoke() magic method.
-     *
-     * This method is present only for forward-compatibility
-     * and because it turns instances of ::Erebot::CallableWrapper::Main
-     * into callbables themselves (ain't that neat?).
+     * Implementation of the __invoke() magic method
+     * so that the wrapped code can be called using
+     * the usual syntax.
      */
     public function __invoke();
-
-    /**
-     * Returns a human representation of this callable.
-     * For (anonymous) functions, this is a string containing
-     * the name of that function.
-     * For methods and classes that implement the __invoke()
-     * magic method (including Closures), this is a string
-     * of the form "ClassName::methodname".
-     *
-     * \retval string
-     *      Human representation of this callable.
-     */
-    public function __toString();
 }
