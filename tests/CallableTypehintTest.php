@@ -55,8 +55,8 @@ namespace {
             // where the callable typehint does not exist
             // natively.
 
-            // The "class" must be defined first for this to work.
-            class_exists('\\callable');
+            // The "callable" class is defined automatically during
+            // the wrapper's initialization process.
             $wrapped = \Erebot\CallableWrapper::wrap(function () {});
             \CallableWrapperTypehintHelper($wrapped);
         }

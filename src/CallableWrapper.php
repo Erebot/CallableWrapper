@@ -167,6 +167,7 @@ abstract class CallableWrapper implements \Erebot\CallableInterface
                 true
             );
             $initialized = true;
+            class_exists('\\callable');
         }
     }
 }
