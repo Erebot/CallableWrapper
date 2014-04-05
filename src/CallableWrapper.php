@@ -51,10 +51,9 @@ abstract class CallableWrapper implements \Erebot\CallableInterface
      *      More information on the callback pseudo-type can be found here:
      *      http://php.net/language.pseudo-types.php#language.types.callback
      */
-    protected function __construct($callable, $representation)
+    protected function __construct($callable)
     {
-        $this->callable        = $callable;
-        $this->representation  = $representation;
+        $this->callable = $callable;
     }
 
     /**
@@ -72,7 +71,7 @@ abstract class CallableWrapper implements \Erebot\CallableInterface
      */
     public function __toString()
     {
-        return $this->representation;
+        return static::represent($this->callable);
     }
 
     /**
@@ -90,8 +89,7 @@ abstract class CallableWrapper implements \Erebot\CallableInterface
      */
     public static function wrap($callable)
     {
-        $representation = static::represent($callable);
-        $parts          = explode('::', $representation);
+        $parts          = explode('::', static::represent($callable));
         if (count($parts) == 1) {
             // We wrapped a function.
             $reflector = new \ReflectionFunction($callable);
@@ -153,7 +151,7 @@ abstract class CallableWrapper implements \Erebot\CallableInterface
             eval($tpl);
         }
         $class = "\\Erebot\\CallableWrapper\\$class";
-        return new $class($callable, $representation);
+        return new $class($callable);
     }
 
     /**
