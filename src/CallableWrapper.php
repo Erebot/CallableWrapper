@@ -20,8 +20,6 @@
 
 namespace Erebot;
 
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'CallableInterface.php';
-
 /**
  * \brief
  *      Class used to represent anything that is callable.
@@ -196,7 +194,7 @@ abstract class CallableWrapper implements \Erebot\CallableInterface
 
                     if ($short === 'callable') {
                         // The class to load is "callable", inject the alias.
-                        if (class_alias('\\Erebot\\CallableInterface', $class, false) !== true) {
+                        if (class_alias('\\Erebot\\CallableInterface', $class, true) !== true) {
                             throw new \RuntimeException('Could not load wrapper');
                         }
                         return true;
