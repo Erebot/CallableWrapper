@@ -29,6 +29,13 @@ class CallableWrapperTestHelper
     }
 }
 
+/**
+ * This test checks whether the various forms of callable objects
+ * (closures, functions, methods, anonymouse functions, invokable objet)
+ * are properly handled by the wrapper.
+ *
+ * It also makes sure that references are not lost when invoking the wrapped code.
+ */
 class CallableWrapperTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()

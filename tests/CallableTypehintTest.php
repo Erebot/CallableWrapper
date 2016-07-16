@@ -27,6 +27,13 @@ namespace {
     {
     }
 
+    /**
+     * This test ensures the "callable" typehint works properly
+     * when used in the global namespace and in a custom namespace
+     * on PHP 5.3.x.
+     * It also serves as a compatibility/regression test on later
+     * PHP versions to make sure we do not break anything.
+     */
     class CallableTypehintTest extends PHPUnit_Framework_TestCase
     {
         public function setUp()

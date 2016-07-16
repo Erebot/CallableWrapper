@@ -20,6 +20,8 @@
 
 namespace Erebot;
 
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'CallableInterface.php';
+
 /**
  * \brief
  *      Class used to represent anything that is callable.
@@ -101,6 +103,8 @@ abstract class CallableWrapper implements \Erebot\CallableInterface
             $reflector = new \ReflectionMethod($callable[0], $callable[1]);
         }
 
+        // References are lost, unless __invoke()'s signature also requires them.
+        // We must also make sure default values are preserved.
         $args = array();
         foreach ($reflector->getParameters() as $argReflect) {
             $arg = '';
@@ -180,52 +184,53 @@ abstract class CallableWrapper implements \Erebot\CallableInterface
         static $initialized = false;
         static $structures  = array();
 
-        if (!defined('T_CALLABLE')) {
-            if (!$initialized) {
-                spl_autoload_register(
-                    function ($class) {
-                        $parts  = array_map('strrev', explode('\\', strrev($class), 2));
-                        $short  = array_shift($parts);
-                        $ns     = (string) array_shift($parts);
+        if (defined('T_CALLABLE'))
+            return;
 
-                        if ($short === 'callable') {
-                            // The class to load is "callable", inject the alias.
-                            if (class_alias('\\Erebot\\CallableInterface', "$class", true) !== true) {
-                                throw new \RuntimeException('Could not load wrapper');
-                            }
-                            return true;
+        if (!$initialized) {
+            spl_autoload_register(
+                function ($class) {
+                    $parts  = array_map('strrev', explode('\\', strrev($class), 2));
+                    $short  = array_shift($parts);
+                    $ns     = (string) array_shift($parts);
+
+                    if ($short === 'callable') {
+                        // The class to load is "callable", inject the alias.
+                        if (class_alias('\\Erebot\\CallableInterface', $class, false) !== true) {
+                            throw new \RuntimeException('Could not load wrapper');
                         }
+                        return true;
+                    }
 
-                        // Otherwise, inject the alias in the namespace
-                        // of the class being loaded.
-                        class_exists("$ns\\callable");
-                        return false;
-                    },
-                    true
-                );
-                $initialized = true;
-            }
-
-            // Inject the alias in existing namespaces.
-            $funcs  = get_defined_functions();
-            $new    = array_merge(
-                $funcs['user'],
-                get_declared_classes(),
-                get_declared_interfaces()
+                    // Otherwise, inject the alias in the namespace
+                    // of the class being loaded.
+                    class_exists("$ns\\callable");
+                    return false;
+                },
+                true
             );
+            $initialized = true;
+        }
 
-            if ($new != $structures) {
-                $newNS = array();
-                foreach (array_diff($new, $structures) as $structure) {
-                        $parts = explode('\\', strrev($structure), 2);
-                        array_shift($parts); // Remove class/interface name.
-                        $newNS[] = (string) array_shift($parts);
-                }
-                $structures = $new;
-                $newNS      = array_unique($newNS);
-                foreach ($newNS as $ns) {
-                    class_exists(strrev($ns) . '\\callable');
-                }
+        // Inject the alias in existing namespaces.
+        $funcs  = get_defined_functions();
+        $new    = array_merge(
+            $funcs['user'],
+            get_declared_classes(),
+            get_declared_interfaces()
+        );
+
+        if ($new != $structures) {
+            $newNS = array();
+            foreach (array_diff($new, $structures) as $structure) {
+                    $parts = explode('\\', strrev($structure), 2);
+                    array_shift($parts); // Remove class/interface name.
+                    $newNS[] = (string) array_shift($parts);
+            }
+            $structures = $new;
+            $newNS      = array_unique($newNS);
+            foreach ($newNS as $ns) {
+                class_exists(strrev($ns) . '\\callable');
             }
         }
     }
