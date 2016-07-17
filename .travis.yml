@@ -29,7 +29,7 @@ before_script:
     - composer install --dev -n
 
 script:
-    - vendor/bin/phpunit --coverage-clover clover.xml --bootstrap ./tests/bootstrap.php tests/
+    - vendor/bin/phpunit --coverage-clover clover.xml
 
 after_sucess:
     - composer require --dev satooshi/php-coveralls
