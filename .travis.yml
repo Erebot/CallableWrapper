@@ -31,7 +31,7 @@ before_script:
 script:
     - vendor/bin/phpunit --coverage-clover clover.xml --bootstrap ./tests/bootstrap.php tests/
 
-after_script:
+after_sucess:
     - composer require --dev satooshi/php-coveralls
-    - vendor/bin/coveralls -n -v
+    - travis_retry vendor/bin/coveralls -n -v
 
