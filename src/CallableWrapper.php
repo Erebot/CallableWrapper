@@ -182,8 +182,9 @@ abstract class CallableWrapper implements \Erebot\CallableInterface
         static $initialized = false;
         static $structures  = array();
 
-        if (defined('T_CALLABLE'))
+        if (defined('T_CALLABLE')) {
             return;
+        }
 
         if (!$initialized) {
             spl_autoload_register(
