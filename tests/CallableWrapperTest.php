@@ -79,7 +79,8 @@ class CallableWrapperTest extends PHPUnit_Framework_TestCase
     public function testCallDynamicFunction()
     {
         $ok = false;
-        $wrapped = \Erebot\CallableWrapper::wrap(create_function('&$res', 'return $res = true;'));
+        // create_function() is now deprecated.
+        $wrapped = \Erebot\CallableWrapper::wrap(@create_function('&$res', 'return $res = true;'));
         $this->assertTrue($wrapped($ok));
         $this->assertTrue($ok);
     }
