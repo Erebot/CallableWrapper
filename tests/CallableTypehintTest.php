@@ -27,6 +27,10 @@ namespace {
     {
     }
 
+    if (!class_exists('PHPUnit_Framework_TestCase')) {
+        class_alias('\\PHPUnit\\Framework\\TestCase', 'PHPUnit_Framework_TestCase');
+    }
+
     /**
      * This test ensures the "callable" typehint works properly
      * when used in the global namespace and in a custom namespace
