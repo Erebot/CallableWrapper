@@ -1,5 +1,11 @@
-A wrapper for the callable typehint in PHP < 5.4.0
-==================================================
+A DEPRECATED wrapper for the callable typehint in PHP < 5.4.0
+=============================================================
+
+..  warning::
+
+    This component is now deprecated and is unneeded in newer versions of PHP.
+    Do not use it in new code.
+
 
 Installation
 ------------
